@@ -1,10 +1,11 @@
+import { Calculator } from "./components/calculator"
 
 
 function App() {
 
   return (
     <>
-     <h1 className='bg-amber-400'> Bienvenue </h1>
+     <Calculator/>
     </>
   )
 }
