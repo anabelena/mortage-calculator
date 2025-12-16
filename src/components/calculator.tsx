@@ -1,21 +1,25 @@
-import { Form } from "./form";
-import { Instructions } from "./instructions";
-import { Results } from "./results";
+import { Form, Instructions, Results } from "../components";
+
+import s from "./Calculator.module.css";
 
 interface Props {
   styles?: string;
 }
 
-export const Calculator = ({ styles='' }: Props) => {
+export const Calculator = ({ styles = "" }: Props) => {
+
+
   return (
-    <div className={`${styles}`}> 
-    
-      <Form/>
-      <div>
-            <Results/>
-            <Instructions/>
+    <div className={` ${styles} w-[375px]`}>
+      {/* Mortage Calculator Form */}
+      <Form />
+      {/* Results panel */}
+      <div className={s.fuente}>
+        <Results />
+        <Instructions />
+  
+        
       </div>
-    
     </div>
-  )
-}
+  );
+};
