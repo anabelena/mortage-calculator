@@ -1,6 +1,6 @@
 import { Form, Instructions, Results } from "../components";
 
-import s from "./Calculator.module.css";
+import s from "./calculator.module.css";
 
 interface Props {
   styles?: string;
@@ -17,8 +17,6 @@ export const Calculator = ({ styles = "" }: Props) => {
       <div className={s.fuente}>
         <Results />
         <Instructions />
-  
-        
       </div>
     </div>
   );
