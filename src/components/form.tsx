@@ -1,5 +1,6 @@
-import { Input } from "./input";
-import { Radio } from "./radio";
+import { Input, Radio, Button } from "../components";
+
+import ArrowImg from "../assets/images/icon-calculator.svg"
 
 interface Props {
   styles?: string;
@@ -20,8 +21,13 @@ export const Form = ({ styles = "" }: Props) => {
       </div>
 
       <h2 className="text-Slate-700 mb-3 text-lg"> Mortgage Type </h2>
-      <Radio label="Repayment"/>
-      <Radio label="Interest Only"/>
+      <Radio label="Repayment" />
+      <Radio label="Interest Only" />
+      <Button 
+      text="Calculate Repayments"
+      imgUrl={ArrowImg}
+     />
+    
     </div>
   );
 };
