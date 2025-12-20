@@ -5,3 +5,4 @@ export { Results } from "./results";
 export {Input} from "./input";
 export { Radio } from "./radio";
 export {Button} from "./button";
+export {Payments} from "./payments";
