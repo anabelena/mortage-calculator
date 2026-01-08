@@ -5,7 +5,7 @@ interface Props {
 
 export const Instructions = ({ styles='' }: Props) => {
   return (
-    <div className={`${styles} text-center bg-Slate-900/90 text-white px-6 py-8`}>
+    <div className={`${styles} text-center bg-Slate-900/90 md:p-12 text-white px-6 py-8 lg:h-full lg:rounded-bl-[80px]`}>
       <img 
       src={IlustrationEmpty} 
       alt="illustration-empty" 

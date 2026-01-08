@@ -10,7 +10,7 @@ export const Form = ({ styles = "" }: Props) => {
   return (
     <div className={`${styles} bg-white px-6 md:p-12 py-8`}>
       <div className="md:flex md:justify-between md:items-center md:mb-6">
-        <h1 className="text-2xl font-bold mb-2.5 md:mb-0"> Mortgage Calculator </h1>
+        <h1 className="text-2xl md:text-3xl font-bold mb-2.5 md:mb-0"> Mortgage Calculator </h1>
         <button className="underline text-Slate-700 mb-5 md:mb-0 cursor-pointer">Clear All</button>
       </div>
       <div className="flex flex-col gap-6 mb-6">
