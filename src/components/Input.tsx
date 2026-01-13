@@ -1,31 +1,37 @@
 interface Props {
-  styles?: string;
   label: string;
   unit?: string;
   position?: "right" | "left"; // right by default
+  error: boolean;
 }
 
 export const Input = ({
-  styles = "",
   label,
   unit,
   position = "right",
+  error,
+  ...props
 }: Props) => {
   return (
-    <div className={`${styles} md:w-full `}>
-      <label className="inline-block text-lg mb-3 text-Slate-700" htmlFor={label}>
+    <div className="md:w-full">
+      <label
+        className="inline-block text-lg mb-3 text-Slate-700"
+        htmlFor={label}
+      >
         {label}
       </label>
+      
       <div className="relative ">
         <input
-          name=""
+          {...props}
           id={label}
           type="number"
-          // agregue clase para ocultar flechas
-          className={`${
-            position === "left" ? "pl-17" : "pl-4"
-          } w-full h-[45px] font-bold rounded-sm outline outline-Slate-500 cursor-pointer focus:outline-Lime peer [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none`}
+          className={`outline ${position === "left" ? "pl-17" : "pl-4"} ${
+            error ? "outline-red-600" : "outline-Slate-500"
+          } w-full h-[45px] font-bold rounded-sm  cursor-pointer focus:outline-Lime peer [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none`}
         />
+        {/* {error} */}
+        {/* add class to change up and dow buttons on input as numeric */}
         <span
           className={`text-Slate-700 bg-Slate-100 peer-focus:bg-Lime absolute top-0 h-full px-2.5 grid place-content-center 
           ${

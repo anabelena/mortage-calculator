@@ -2,7 +2,8 @@ interface Props {
   label: string;
 }
 
-export const Radio = ({ label }: Props) => {
+export const Radio = ({ label, ...props }: Props) => {
+  
   const id = label.replace(/\s+/g, "-").toLowerCase();
 
   return (
@@ -12,6 +13,7 @@ export const Radio = ({ label }: Props) => {
     >
       <div className="relative ">
         <input
+          {...props}
           name="mortgageType"
           type="radio"
           id={id}
