@@ -2,6 +2,7 @@ import { Input, Radio, Button } from "../components";
 import ArrowImg from "../assets/images/icon-calculator.svg";
 import { useForm } from "react-hook-form";
 
+// Definiendo tipo de cambpos en FORM
 interface Inputs {
   mortgageAmount: number;
   mortgageTerm: number;
@@ -47,7 +48,8 @@ export const Form = (styles:string) => {
           <Input
             label="Mortage Term"
             unit="years"
-            error={errors.mortgageTerm?.type === 'required'}
+            error={errors.mortgageTerm?.type === 'required'} //boolean
+            //  Register retorna un objeto con varias props listas para inyectarse en un input
             {...register("mortgageTerm", {
               required: true,
               valueAsNumber: true,
@@ -74,7 +76,11 @@ export const Form = (styles:string) => {
       label="Interest Only" 
       {...register("mortgageType",{required:true})}
       />
-      {errors.mortgageType && <p className="text-red-600 "> This field is required</p>}
+     {errors.mortgageType && (
+    <p className="text-red-600 mt-2 text-sm" >
+     Field is required
+    </p>
+  )}
       <Button text="Calculate Repayments" imgUrl={ArrowImg} />
     </form>
   );

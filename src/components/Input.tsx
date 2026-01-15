@@ -30,10 +30,9 @@ export const Input = ({
             error ? "outline-red-600" : "outline-Slate-500"
           } w-full h-[45px] font-bold rounded-sm  cursor-pointer focus:outline-Lime peer [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none`}
         />
-        {/* {error} */}
         {/* add class to change up and dow buttons on input as numeric */}
         <span
-          className={`text-Slate-700 bg-Slate-100 peer-focus:bg-Lime absolute top-0 h-full px-2.5 grid place-content-center 
+          className={`${error ? 'bg-red-700/80 text-white' : 'bg-slate-100 text-slate-700'} peer-focus:bg-Lime absolute top-0 h-full px-2.5 grid place-content-center 
           ${
             position === "left" ? "left-0 rounded-l-sm" : "right-0 rounded-r-sm"
           }`}
@@ -41,6 +40,7 @@ export const Input = ({
           {unit}
         </span>
       </div>
+          {error && <p className="text-sm text-red-600 mt-2"> Field is required  </p>}
     </div>
   );
 };
