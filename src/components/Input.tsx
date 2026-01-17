@@ -1,8 +1,10 @@
-interface Props {
+import type {FieldError}  from "react-hook-form";
+
+interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
   unit?: string;
   position?: "right" | "left"; // right by default
-  error: boolean;
+  error?: FieldError;
 }
 
 export const Input = ({
@@ -40,7 +42,7 @@ export const Input = ({
           {unit}
         </span>
       </div>
-          {error && <p className="text-sm text-red-600 mt-2"> Field is required  </p>}
+          {error && <p className="text-sm text-red-600 mt-2"> {error.message} </p>}
     </div>
   );
 };
