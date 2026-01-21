@@ -1,30 +1,39 @@
 import { Input, Radio, Button } from "../components";
 import ArrowImg from "../assets/images/icon-calculator.svg";
-import { useForm } from "react-hook-form";
+import { useForm, type SubmitHandler } from "react-hook-form";
+import {calculateMortgage,type MortgageType} from "../utils/calculateMortgage";
 
 // Define the input types in the form
 interface Inputs {
   mortgageAmount: number;
   mortgageTerm: number;
   interestRate: number;
-  mortgageType: "repayment" | "interest";
+  mortgageType: MortgageType; //type from calculateMortgage.ts
 }
 
+// CONSTANTES
 const MAX_MORTGAGE_TERM: number = 25;
 const MAX_INTEREST_RATE: number = 5;
 
 export const Form = (styles: string) => {
-  // register: (fn) conecta inputs al formulario
-  // handleSubmit: (fn) controla submit y evita preventDefault manual
-  // errors: devuelve errores de validacion
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>({ mode: "onSubmit", reValidateMode: "onChange" });
+  } = useForm<Inputs>();
+  // register:  conecta inputs al formulario
+  // handleSubmit: (fn) controla submit y evita preventDefault manual
+  // errors: devuelve errores de validacion
 
-  const sendForm = () => {
-    console.log("Form was sended!");
+  const sendForm: SubmitHandler<Inputs> = (data: Inputs) => {
+    const { mortgageAmount, mortgageTerm, interestRate, mortgageType } = data;
+    const { monthlyPayment, totalRepay } = calculateMortgage(
+      mortgageAmount,
+      mortgageTerm,
+      interestRate,
+      mortgageType,
+    );
+    console.log(monthlyPayment,totalRepay)
   };
 
   return (
@@ -41,7 +50,8 @@ export const Form = (styles: string) => {
           Clear All
         </button>
       </div>
-      {/* NUMERIC INPUTS */}
+
+      {/*  INPUTS */}
       <div className="flex flex-col gap-6 mb-6">
         <Input
           label="Mortage Amount"
@@ -86,10 +96,12 @@ export const Form = (styles: string) => {
       <h2 className="text-Slate-700 mb-5 text-lg"> Mortgage Type </h2>
       <Radio
         label="Repayment"
+        value="repayment"
         {...register("mortgageType", { required: true })}
       />
       <Radio
         label="Interest Only"
+        value="interest"
         {...register("mortgageType", { required: true })}
       />
       {errors.mortgageType && (

@@ -26,6 +26,7 @@ export const Input = ({
       <div className="relative ">
         <input
           {...props}
+          step={0.01}
           id={label}
           type="number"
           className={`outline ${position === "left" ? "pl-17" : "pl-4"} ${

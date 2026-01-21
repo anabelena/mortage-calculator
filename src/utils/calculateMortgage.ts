@@ -11,6 +11,7 @@ export function calculateMortgage(
   interestRate: number,
   type: MortgageType,
 ): MortgageResult {
+  
   const monthlyRate = interestRate / 100 / 12;
   const totalPayments = years * 12;
 
