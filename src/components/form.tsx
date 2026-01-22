@@ -1,7 +1,15 @@
 import { Input, Radio, Button } from "../components";
 import ArrowImg from "../assets/images/icon-calculator.svg";
 import { useForm, type SubmitHandler } from "react-hook-form";
-import {calculateMortgage,type MortgageType} from "../utils/calculateMortgage";
+import {
+  calculateMortgage,
+  type MortgageType,
+} from "../utils/calculateMortgage";
+import { useContext } from "react";
+import { PaymentContext } from "../contexts/payment-context";
+interface Props {
+  styles?: string;
+}
 
 // Define the input types in the form
 interface Inputs {
@@ -15,12 +23,15 @@ interface Inputs {
 const MAX_MORTGAGE_TERM: number = 25;
 const MAX_INTEREST_RATE: number = 5;
 
-export const Form = (styles: string) => {
+export const Form = ({ styles }: Props) => {
+  const context = useContext(PaymentContext);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
+
   // register:  conecta inputs al formulario
   // handleSubmit: (fn) controla submit y evita preventDefault manual
   // errors: devuelve errores de validacion
@@ -33,7 +44,10 @@ export const Form = (styles: string) => {
       interestRate,
       mortgageType,
     );
-    console.log(monthlyPayment,totalRepay)
+    context.setResult({
+      monthlyPayment,
+      totalRepay,
+    });
   };
 
   return (

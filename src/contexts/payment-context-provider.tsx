@@ -11,8 +11,9 @@ export const PaymentContextProvider = ({ children }: Props) => {
     monthlyPayment: 0,
   });
 
-  return;
-  <PaymentContext.Provider value={{ result, setResult }}>
-    {children}
-  </PaymentContext.Provider>;
+  return (
+    <PaymentContext.Provider value={{ result, setResult }}>
+      {children}
+    </PaymentContext.Provider>
+  );
 };
