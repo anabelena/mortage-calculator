@@ -7,6 +7,7 @@ import {
 } from "../utils/calculateMortgage";
 import { useContext } from "react";
 import { PaymentContext } from "../contexts/payment-context";
+
 interface Props {
   styles?: string;
 }
@@ -25,9 +26,9 @@ const MAX_INTEREST_RATE: number = 5;
 
 export const Form = ({ styles }: Props) => {
   const context = useContext(PaymentContext);
-
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
@@ -50,6 +51,15 @@ export const Form = ({ styles }: Props) => {
     });
   };
 
+  const clearAll = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    reset();
+    context.setResult({
+      monthlyPayment: 0,
+      totalRepay: 0,
+    });
+  };
+
   return (
     <form
       onSubmit={handleSubmit(sendForm)}
@@ -60,7 +70,10 @@ export const Form = ({ styles }: Props) => {
         <h1 className="text-2xl md:text-3xl font-bold mb-2.5 md:mb-0">
           Mortgage Calculator
         </h1>
-        <button className="underline text-Slate-700 mb-5 md:mb-0 cursor-pointer">
+        <button
+          onClick={clearAll}
+          className="underline text-Slate-700 mb-5 md:mb-0 cursor-pointer"
+        >
           Clear All
         </button>
       </div>
