@@ -13,7 +13,7 @@ interface Props {
 }
 
 // Define the input types in the form
-export interface Inputs {
+interface Inputs {
   mortgageAmount: string;
   mortgageTerm: string;
   interestRate: string;
@@ -51,25 +51,14 @@ export const Form = ({ styles }: Props) => {
   // reset(): limpia el estado de todos los inputs en RHF
 
   const sendForm: SubmitHandler<Inputs> = (data: Inputs) => {
+
     const mortgageAmount = Number(data.mortgageAmount);
     const mortgageTerm = Number(data.mortgageTerm);
     const interestRate = Number(data.interestRate);
     const mortgageType = data.mortgageType;
-    // const { mortgageAmount, mortgageTerm, interestRate, mortgageType } = data;
-
-    console.log(
-      "mortgageAmount",
-      mortgageAmount,
-      "mortgageTerm",
-      mortgageTerm,
-      "interestrate",
-      interestRate,
-      "mortgagetype",
-      mortgageType,
-    );
 
     // Bloquear cálculo si algún input está vacío o inválido
-    // if (!mortgageAmount || !mortgageTerm || !interestRate) return;
+    if (!mortgageAmount || !mortgageTerm || !interestRate) return;
 
     const { monthlyPayment, totalRepay } = calculateMortgage(
       mortgageAmount,

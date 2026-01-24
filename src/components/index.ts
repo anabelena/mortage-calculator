@@ -1,8 +1,8 @@
+export { Input } from "./Input";
 export { Calculator } from "./calculator";
 export { Instructions } from "./instructions";
 export { Form } from "./form";
 export { Results } from "./results";
-export {Input} from "./input";
 export { Radio } from "./radio";
-export {Button} from "./button";
-export {Payments} from "./payments";
+export { Button } from "./button";
+export { Payments } from "./payments";
