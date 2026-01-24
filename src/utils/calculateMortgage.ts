@@ -1,5 +1,4 @@
 export type MortgageType = "repayment" | "interest";
-
 interface MortgageResult {
   monthlyPayment: number;
   totalRepay: number;
@@ -11,7 +10,6 @@ export function calculateMortgage(
   interestRate: number,
   type: MortgageType,
 ): MortgageResult {
-  
   const monthlyRate = interestRate / 100 / 12;
   const totalPayments = years * 12;
 

@@ -13,11 +13,11 @@ interface Props {
 }
 
 // Define the input types in the form
-interface Inputs {
-  mortgageAmount: number;
-  mortgageTerm: number;
-  interestRate: number;
-  mortgageType: MortgageType; //type from calculateMortgage.ts
+export interface Inputs {
+  mortgageAmount: string;
+  mortgageTerm: string;
+  interestRate: string;
+  mortgageType: MortgageType;
 }
 
 // CONSTANTES
@@ -31,29 +31,67 @@ export const Form = ({ styles }: Props) => {
     reset,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>();
+    watch,
+  } = useForm<Inputs>({
+    defaultValues: {
+      mortgageAmount: "",
+      mortgageTerm: "",
+      interestRate: "",
+      mortgageType: "interest",
+    },
+  });
+
+  const values: Inputs = watch();
+
+  //
 
   // register:  conecta inputs al formulario
   // handleSubmit: (fn) controla submit y evita preventDefault manual
   // errors: devuelve errores de validacion
+  // reset(): limpia el estado de todos los inputs en RHF
 
   const sendForm: SubmitHandler<Inputs> = (data: Inputs) => {
-    const { mortgageAmount, mortgageTerm, interestRate, mortgageType } = data;
+    const mortgageAmount = Number(data.mortgageAmount);
+    const mortgageTerm = Number(data.mortgageTerm);
+    const interestRate = Number(data.interestRate);
+    const mortgageType = data.mortgageType;
+    // const { mortgageAmount, mortgageTerm, interestRate, mortgageType } = data;
+
+    console.log(
+      "mortgageAmount",
+      mortgageAmount,
+      "mortgageTerm",
+      mortgageTerm,
+      "interestrate",
+      interestRate,
+      "mortgagetype",
+      mortgageType,
+    );
+
+    // Bloquear cálculo si algún input está vacío o inválido
+    // if (!mortgageAmount || !mortgageTerm || !interestRate) return;
+
     const { monthlyPayment, totalRepay } = calculateMortgage(
       mortgageAmount,
       mortgageTerm,
       interestRate,
       mortgageType,
     );
+
     context.setResult({
       monthlyPayment,
       totalRepay,
     });
   };
 
-  const clearAll = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    reset();
+  const clearAll = () => {
+    reset({
+      mortgageAmount: "",
+      mortgageTerm: "",
+      interestRate: "",
+      mortgageType: "interest", // o repayment
+    });
+    console.log("limpiando");
     context.setResult({
       monthlyPayment: 0,
       totalRepay: 0,
@@ -71,6 +109,7 @@ export const Form = ({ styles }: Props) => {
           Mortgage Calculator
         </h1>
         <button
+          type="button"
           onClick={clearAll}
           className="underline text-Slate-700 mb-5 md:mb-0 cursor-pointer"
         >
@@ -87,8 +126,9 @@ export const Form = ({ styles }: Props) => {
           error={errors.mortgageAmount}
           {...register("mortgageAmount", {
             required: true,
-            valueAsNumber: true,
+            // valueAsNumber: true,
           })}
+          value={values.mortgageAmount} // <- sincroniza con RHF
         />
 
         <div className="md:flex md:gap-5">
@@ -98,12 +138,13 @@ export const Form = ({ styles }: Props) => {
             error={errors.mortgageTerm}
             {...register("mortgageTerm", {
               required: true,
-              valueAsNumber: true,
+              // valueAsNumber: true,
               validate: (value) =>
-                value > MAX_MORTGAGE_TERM
+                Number(value) > MAX_MORTGAGE_TERM
                   ? 'Mortgage Term: "Max 25 years"'
                   : true,
             })}
+            value={values.mortgageTerm}
           />
           <Input
             label="Interest Rate"
@@ -111,16 +152,21 @@ export const Form = ({ styles }: Props) => {
             error={errors.interestRate}
             {...register("interestRate", {
               required: true,
+              min: 0.1,
               validate: (value) =>
-                value > MAX_INTEREST_RATE ? 'Interest Rate: "Max 5%"' : true,
-              valueAsNumber: true,
+                Number(value) >= MAX_INTEREST_RATE
+                  ? 'Interest Rate: "Max 5%"'
+                  : true,
+              // valueAsNumber: true,
             })}
+            value={values.interestRate}
           />
         </div>
       </div>
 
       {/* RADIO INPUTS */}
       <h2 className="text-Slate-700 mb-5 text-lg"> Mortgage Type </h2>
+      {/* radio share name so only can be selected */}
       <Radio
         label="Repayment"
         value="repayment"
