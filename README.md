@@ -8,6 +8,7 @@ A simple and accessible mortgage calculator that lets users estimate monthly pay
 
 - ⚛️ **React 19**
 - 💻 **Typescript**
+- ⚒️ **React Hook Form**
 - 🎨 **Tailwind**
 - ⚡️ **Vite**
 
@@ -39,17 +40,9 @@ A simple and accessible mortgage calculator that lets users estimate monthly pay
 
 ## Screenshots 📷
 
-### 🖥️ Desktop view
+### 🖥️ Mobile, Ipad , Desktop view
 
-![Desktop Screenshot](./public/screenshots/desktop.jpeg)
-
-### 💻 Tablet view
-
-![Tablet Screenshot](./public/screenshots/tablet.jpeg)
-
-### 📱 Mobile view
-
-![Mobile Screenshot](./public/screenshots/mobile.jpeg)
+![Desktop Screenshot](./public/screenshots/screenshots.png)
 
 ## 🌐 Live Demo
 
