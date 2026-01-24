@@ -46,8 +46,8 @@ A simple and accessible mortgage calculator that lets users estimate monthly pay
 
 ## 🌐 Live Demo
 
-👉 [react-gym-app.pages.dev](https://react-gym-app.pages.dev)
+<!-- 👉 [react-gym-app.pages.dev](https://react-gym-app.pages.dev) -->
 
 ## Contact 📧
 
-Developed by 👩🏻‍💻[anabelena](https://github.com/anabelena)
+Developed by 🦙[anabelena](https://github.com/anabelena)
